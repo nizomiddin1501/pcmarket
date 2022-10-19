@@ -19,7 +19,7 @@ public class Category {
     private String name;
 
     @ManyToOne
-    private Category parentCategoryId;
+    private Category parentCategory;
 
 
 

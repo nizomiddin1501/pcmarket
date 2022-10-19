@@ -5,6 +5,7 @@ import uz.developers.pcmarket.entity.Category;
 
 public interface CategoryRepository extends JpaRepository<Category,Integer> {
 
+    boolean existsByName(String name);
 
 
 }

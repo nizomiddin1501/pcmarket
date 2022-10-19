@@ -9,6 +9,7 @@ import uz.developers.pcmarket.repository.CategoryRepository;
 import uz.developers.pcmarket.service.CategoryService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -17,26 +18,51 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getCategories() {
-        return null;
+        return categoryRepository.findAll();
     }
 
     @Override
     public Category getCategory(Integer id) {
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
+        if (optionalCategory.isPresent()) {
+            return optionalCategory.get();
+        }
         return null;
     }
 
     @Override
     public ApiResponce addCategory(CategoryDto categoryDto) {
-        return null;
+        Category savedCategory = new Category();
+        savedCategory.setName(categoryDto.getName());
+
+        if (categoryDto.getParentCategoryId() != null) {
+            Optional<Category> optionalCategory = categoryRepository.findById(categoryDto.getParentCategoryId());
+            if (optionalCategory.isEmpty()) {
+                return new ApiResponce("Such category is not found", false);
+            }
+            savedCategory.setParentCategory(optionalCategory.get());
+        }
+        categoryRepository.save(savedCategory);
+        return new ApiResponce("Category is saved", true);
     }
 
     @Override
     public ApiResponce editCategory(Integer id, CategoryDto categoryDto) {
-        return null;
+        Optional<Category> optionalCategory = categoryRepository.findById(id);
+        if (optionalCategory.isEmpty()) {
+            return new ApiResponce("Such category is not found", false);
+        }
+        Category editedCategory = optionalCategory.get();
+        editedCategory.setName(categoryDto.getName());
+        editedCategory.setParentCategory(optionalCategory.get());
+        categoryRepository.save(editedCategory);
+        return new ApiResponce("Category is edited",true);
+
     }
 
     @Override
     public ApiResponce deleteCategory(Integer id) {
-        return null;
+        categoryRepository.deleteById(id);
+        return new ApiResponce("Category is deleted",true);
     }
 }

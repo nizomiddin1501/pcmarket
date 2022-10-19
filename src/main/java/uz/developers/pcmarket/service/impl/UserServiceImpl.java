@@ -9,6 +9,7 @@ import uz.developers.pcmarket.repository.UserRepository;
 import uz.developers.pcmarket.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,19 +19,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getUsers() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override
     public User getUser(Integer id) {
-        return null;
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        }
+        return new User();
     }
 
     @Override
     public ApiResponce addUser(UserDto userDto) {
+        User savedUser = new User();
+        //todo userDto dan keladigan warehouseId listini generatsiya qilish kerak
+        //todo put da ham
         return null;
     }
 
+    //    private String firstName;
+//    private String lastName;
+//    private String phoneNumber;
+//    private String code;
+//    private String password;
     @Override
     public ApiResponce editUser(Integer id, UserDto userDto) {
         return null;
@@ -38,6 +51,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ApiResponce deleteUser(Integer id) {
-        return null;
+        userRepository.deleteById(id);
+        return new ApiResponce("User is deleted",true);
     }
 }
