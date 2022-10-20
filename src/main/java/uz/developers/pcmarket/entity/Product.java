@@ -26,4 +26,6 @@ public class Product {
 
     private String code;
 
+    private double price;
+
 }

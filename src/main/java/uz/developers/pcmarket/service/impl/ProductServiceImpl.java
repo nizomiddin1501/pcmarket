@@ -70,6 +70,7 @@ public class ProductServiceImpl implements ProductService {
         product.setCode(productDto.getCode());
         product.setCategory(optionalCategory.get());
         product.setPhoto(optionalAttachment.get());
+        product.setPrice(productDto.getPrice());
 
         productRepository.save(product);
         return new ApiResponce("Product is saved", true);
@@ -91,6 +92,7 @@ public class ProductServiceImpl implements ProductService {
         Product editedProduct = optionalProduct.get();
         editedProduct.setName(productDto.getName());
         editedProduct.setCode(productDto.getCode());
+        editedProduct.setPrice(productDto.getPrice());
 
         productRepository.save(editedProduct);
         return new ApiResponce("Product is edited",true);

@@ -18,4 +18,6 @@ public class ProductDto {
     private Integer photoId;
 
     private String code;
+
+    private double price;
 }
