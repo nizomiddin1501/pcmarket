@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/attachment")
+@RequestMapping("/api/attachment")
 public class AttachmentController {
     @Autowired
     AttachmentService attachmentService;

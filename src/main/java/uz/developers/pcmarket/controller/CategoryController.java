@@ -12,7 +12,7 @@ import uz.developers.pcmarket.service.CategoryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/api/category")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;

@@ -1,6 +1,9 @@
 package uz.developers.pcmarket.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import uz.developers.pcmarket.entity.Test;
 import uz.developers.pcmarket.payload.ApiResponce;
@@ -18,7 +21,8 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public List<Test> getTests() {
-       return testRepository.findAll();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return testRepository.findAll();
     }
 
     @Override
@@ -45,7 +49,7 @@ public class TestServiceImpl implements TestService {
         Test editingTest = optionalTest.get();
         editingTest.setName(test.getName());
         testRepository.save(editingTest);
-        return new ApiResponce("Test i edited",true);
+        return new ApiResponce("Test is edited",true);
     }
 
     @Override

@@ -15,7 +15,7 @@ import uz.developers.pcmarket.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 public class ProductController {
 
     @Autowired

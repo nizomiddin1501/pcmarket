@@ -14,7 +14,7 @@ import uz.developers.pcmarket.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/api/test")
 public class TestController {
 
 
